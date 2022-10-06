@@ -5,3 +5,6 @@
     border: 1px solid var(--placeholder-color);
     background: white;
 }
+.div-post-editor {
+    color: black;
+}

@@ -24,7 +24,6 @@ export function renderPost(post) {
     p2.textContent = 'Contact: ' + post.contact;
     p2.classList.add('contact-info');
 
-    // li.append(h3, h32, img, p, p2);
     a.append(h3, h32, img, p, p2);
     li.append(a);
     return li;

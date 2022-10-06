@@ -44,14 +44,11 @@ export async function uploadImage(bucketName, imagePath, imageFile) {
     });
 
     if (response.error) {
-        // eslint-disable-next-line no-console
         return null;
     }
 
     // Construct the URL to this image:
     url = `${SUPABASE_URL}/storage/v1/object/public/${response.data.Key}`;
-    // URL Looks like:
-    // https://nwxkvnsiwauieanvbiri.supabase.co/storage/v1/object/public/images/pets/984829079656/Franky.jpeg
 
     return url;
 }

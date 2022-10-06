@@ -39,7 +39,6 @@ function displayPosts() {
 }
 function displayError() {
     if (error) {
-        // eslint-disable-next-line no-console
         errorDisplay.textContent = error.message;
     } else {
         errorDisplay.textContent = '';
