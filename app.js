@@ -33,7 +33,6 @@ function displayPosts() {
     postList.innerHTML = '';
 
     for (const post of posts) {
-        console.log(post.category);
         const petEl = renderPost(post);
         postList.append(petEl);
     }

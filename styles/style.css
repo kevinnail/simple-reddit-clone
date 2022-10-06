@@ -28,9 +28,9 @@
     border-radius: 10px;
     transform: scale(1.01);
     transition: 250ms;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
-#post-list li:active {
+#post-list li.a:active {
     /* background-color: yellow;
     padding: 25px;
     background-image: linear-gradient(black, white, white, black);
@@ -41,7 +41,7 @@
     box-shadow: 0px 0px 0px 0px white;
     border-radius: 10px;
     transform: scale(0.95);
-    transition: 250ms;
+    transition: 150ms;
     cursor: pointer;
 }
 
