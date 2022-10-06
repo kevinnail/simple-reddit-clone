@@ -29,11 +29,19 @@ export function renderPost(post) {
     return li;
 }
 function categoryEmoji(category) {
-    if (category === 'dry-pieces') return 'Dry Pieces';
-    if (category === 'bubblers') return 'Bubblers';
-    if (category === 'recyclers') return 'Recyclers';
-    if (category === 'slides') return 'Slides';
-    if (category === 'marbles') return 'Marbles';
-    if (category === 'goblets') return 'Goblets';
-    if (category === 'misc') return 'Misc';
+    if (category === 'Dry-pieces') return 'Dry Pieces';
+    if (category === 'Bubblers') return 'Bubblers';
+    if (category === 'Recyclers') return 'Recyclers';
+    if (category === 'Slides') return 'Slides';
+    if (category === 'Marbles') return 'Marbles';
+    if (category === 'Goblets') return 'Goblets';
+    if (category === 'Misc') return 'Misc';
+}
+
+export function renderComment(comment) {
+    const li = document.createElement('li');
+
+    li.textContent = comment.text;
+
+    return li;
 }

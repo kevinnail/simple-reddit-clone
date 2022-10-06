@@ -1,7 +1,7 @@
 :root {
     --background: rgb(0, 43, 100);
     --header-background: white;
-    --text-color: rgb(7, 5, 68);
+    --text-color: rgb(0, 0, 0);
     --label-color: rgb(75, 102, 98);
     --placeholder-color: rgb(136, 136, 153);
     --offset-color: rgb(164, 201, 255);
