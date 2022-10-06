@@ -55,3 +55,16 @@ export async function uploadImage(bucketName, imagePath, imageFile) {
 
     return url;
 }
+
+export async function getPosts(title) {
+    let query = client
+        .from('posts')
+        .select('*')
+        .limit(200)
+        .order('created_at', { ascending: false });
+    if (title) {
+        query.ilike('title', `%${title}%`);
+        return query;
+    }
+    return query;
+}

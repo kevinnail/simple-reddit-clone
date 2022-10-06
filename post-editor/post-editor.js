@@ -11,6 +11,14 @@ const addButton = document.getElementById('add-button');
 /* State */
 let error = null;
 /* Events */
+imageInput.addEventListener('change', () => {
+    const file = imageInput.files[0];
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+    } else {
+        preview.src = '../assets/pet-photo-placeholder.png';
+    }
+});
 postForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     addButton.disabled = true;
