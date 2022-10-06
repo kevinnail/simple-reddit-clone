@@ -41,18 +41,30 @@
             </nav>
         </header>
         <main>
-            <form id="pet-form">
+            <form id="post-form">
+                <label>
+                    <div>Category</div>
+                    <select required="" name="category">
+                        <option value="null">choose category</option>
+                        <option value="community">🧑🏻‍🤝‍🧑🏽Community</option>
+                        <option value="services">🐕‍🦺Services</option>
+                        <option value="housing">🏠Housing</option>
+                        <option value="for-sale">💵For Sale</option>
+                        <option value="jobs">🤑Jobs</option>
+                        <option value="gigs">🎙️Gigs</option>
+                        <option value="pictures-of-cats">😻Pictures of cats</option>
+                    </select>
+                </label>
                 <label>
                     <div>Title</div>
-                    <input name="name" required placeholder="Title" />
+                    <input name="title" required="" placeholder="Enter title" />
                 </label>
-
                 <label>
                     <div>Description</div>
                     <textarea
                         name="description"
-                        required
-                        placeholder="Tell us about your work!"
+                        required=""
+                        placeholder="What are you posting about?"
                     ></textarea>
                 </label>
 
@@ -62,18 +74,20 @@
                         id="image-input"
                         name="image"
                         type="file"
-                        required
                         placeholder="upload an image..."
                     />
                 </label>
                 <img
                     id="preview"
                     class="preview"
-                    alt="avatar preview"
+                    alt="avatar review"
                     src="../assets/place-holder.png"
                 />
-
-                <button>Add Post</button>
+                <label>
+                    <div style="color: black">Contact Info</div>
+                    <textarea name="contact" placeholder="Enter contact info..."></textarea>
+                </label>
+                <button id="add-button">Add Post</button>
 
                 <p id="error-display"></p>
             </form>
