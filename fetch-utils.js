@@ -68,3 +68,13 @@ export async function getPosts(title) {
     }
     return query;
 }
+
+export async function getPost(id) {
+    return await client
+        .from('posts')
+        .select(`*`)
+        .eq('id', id)
+        // .order('created_at', { foreignTable: 'comments', ascending: false })
+        .order('created_at')
+        .single();
+}
