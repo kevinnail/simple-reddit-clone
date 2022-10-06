@@ -25,6 +25,7 @@
         <!-- css -->
         <link rel="stylesheet" href="/styles/reset.css" />
         <link rel="stylesheet" href="/styles/global.css" />
+        <link rel="stylesheet" href="/styles/form.css" />
         <link rel="stylesheet" href="post.css" />
         <!-- add link for page specific css -->
     </head>
@@ -40,6 +41,34 @@
             </nav>
         </header>
 
+        <main>
+            <section class="post-container">
+                <ul class="single-post">
+                    <li>
+                        <h2 class="title" style="">Title</h2>
+                        <p class="description" style="margin: 0px 15px 0px 15px">
+                            Description that goes on and describes what has been posted in
+                            descriptive terms so that no one has to describe them ever again.
+                        </p>
+                        <p class="contact-info">Contact: 555-555-5555 johndoe@gmail.com</p>
+                    </li>
+                    <li><img class="image-size" src="/assets/place-holder.png" /></li>
+                    <li>
+                        <h3 class="category" style="text-align: end">Category</h3>
+                    </li>
+                </ul>
+                <p id="error-display" class="error"></p>
+
+                <div>
+                    <form id="add-comment-form" class="inline">
+                        <input name="text" placeholder="add a comment..." />
+                        <button>Comment</button>
+                    </form>
+                </div>
+
+                <ul id="comment-list"></ul>
+            </section>
+        </main>
         <footer></footer>
     </body>
 </html>
