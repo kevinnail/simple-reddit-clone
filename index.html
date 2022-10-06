@@ -25,18 +25,25 @@
         <!-- css -->
         <link rel="stylesheet" href="/styles/reset.css" />
         <link rel="stylesheet" href="/styles/global.css" />
+        <link rel="stylesheet" href="/styles/style.css" />
         <!-- add link for page specific css -->
     </head>
 
     <body>
         <header class="page-header">
+            <img class="logo" src="/assets/sherlock.jpeg" alt="logo" />
             <p class="title">Glass It Up</p>
             <nav>
+                <a href="/post">REMOVE single post link</a>
+                <a href="/post-editor">Add Post</a>
                 <a href="/">Home</a>
                 <a id="sign-out-link" href="auth">Sign Out</a>
             </nav>
         </header>
 
-        <main></main>
+        <main>
+            <p id="error-display" class="error"></p>
+            <ul id="post-list"></ul>
+        </main>
     </body>
 </html>
