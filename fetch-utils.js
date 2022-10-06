@@ -28,3 +28,28 @@ export async function signOutUser() {
 }
 
 /* Data functions */
+
+/* Storage functions  */
+
+export async function uploadImage(bucketName, imagePath, imageFile) {
+    const bucket = client.storage.from(bucketName);
+    let url = null;
+    const response = await bucket.upload(imagePath, imageFile, {
+        cacheControl: '3600',
+        // in this case, we will _replace_ any
+        // existing file with same name.
+        upsert: true,
+    });
+
+    if (response.error) {
+        // eslint-disable-next-line no-console
+        return null;
+    }
+
+    // Construct the URL to this image:
+    url = `${SUPABASE_URL}/storage/v1/object/public/${response.data.Key}`;
+    // URL Looks like:
+    // https://nwxkvnsiwauieanvbiri.supabase.co/storage/v1/object/public/images/pets/984829079656/Franky.jpeg
+
+    return url;
+}
