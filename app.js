@@ -5,7 +5,8 @@ import './auth/user.js';
 /* Get DOM Elements */
 
 /* State */
-
+let error = null;
+let pets = [];
 /* Events */
 
 /* Display Functions */
