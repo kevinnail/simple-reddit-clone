@@ -55,6 +55,11 @@ addCommentForm.addEventListener('submit', async (e) => {
         addCommentForm.reset();
     }
 });
+
+postImage.addEventListener('click', () => {
+    postImage.requestFullscreen();
+});
+
 /* Display */
 function displayPost() {
     postTitle.textContent = post.title;

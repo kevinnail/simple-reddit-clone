@@ -40,6 +40,9 @@ main {
     display: grid;
     grid-template-columns: 1fr 100px;
     align-items: end;
+    box-sizing: border-box;
+    width: 70%;
+    margin: 0px auto 0px auto;
 }
 
 #add-comment-form input {
@@ -47,9 +50,22 @@ main {
 }
 
 #comment-list li {
-    background: var(--header-background);
+    background: rgb(255, 255, 255);
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 43, 100, 1),
+        rgba(0, 43, 100, 0.5),
+        rgba(0, 43, 100, 0.5)
+    );
     padding: 20px 25px;
     border-bottom: 1px solid var(--placeholder-color);
+    margin: 10px;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 70%;
+    margin: 10px auto 10px auto;
+    box-shadow: 0px 0px 10px 0px white;
 }
 
 .single-post {
@@ -70,6 +86,25 @@ main {
     box-shadow: 2px 2px 20px 0px white;
 }
 .image-size {
-    width: 100%;
     border: 2px solid black;
+    cursor: pointer;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.image-center {
+    margin: 0px auto 0px auto;
+}
+
+.description {
+    color: white;
+    background-color: rgba(0, 43, 100, 1);
+    border: 1px solid black;
+    padding: 5px 10px 5px 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px white;
+    text-align: center;
+    width: 80%;
+    min-width: 100px;
 }

@@ -6,6 +6,7 @@ export function renderPost(post) {
 
     const h3 = document.createElement('h3');
     h3.textContent = post.title;
+    h3.classList.add('heading');
 
     const h32 = document.createElement('h3');
     h32.textContent = categoryEmoji(post.category);
