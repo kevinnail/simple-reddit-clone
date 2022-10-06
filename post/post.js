@@ -33,7 +33,7 @@ window.addEventListener('load', async () => {
         location.replace('/');
     } else {
         displayPost();
-        // displayComments();
+        displayComments();
     }
 });
 addCommentForm.addEventListener('submit', async (e) => {
@@ -51,6 +51,7 @@ addCommentForm.addEventListener('submit', async (e) => {
     } else {
         const comment = response.data;
         post.comments.unshift(comment);
+        displayComments();
         addCommentForm.reset();
     }
 });
@@ -63,7 +64,13 @@ function displayPost() {
     postImage.src = post.image_url;
     postImage.alt = `${post.name} image`;
 }
-
+function displayComments() {
+    commentList.innerHTML = '';
+    for (const comment of post.comments) {
+        const commentEl = renderComment(comment, user.id);
+        commentList.append(commentEl);
+    }
+}
 function displayError() {
     if (error) {
         // eslint-disable-next-line no-console
