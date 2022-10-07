@@ -108,3 +108,13 @@ main {
     width: 80%;
     min-width: 100px;
 }
+
+.delete-cmt-btn {
+    display: inline-block;
+    justify-content: flex-end;
+}
+
+.flex-comment {
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+}

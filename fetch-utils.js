@@ -53,17 +53,23 @@ export async function uploadImage(bucketName, imagePath, imageFile) {
     return url;
 }
 
-export async function getPosts(title) {
+export async function getPosts(title, category) {
     let query = client
         .from('posts')
-        .select('*')
+        .select('*', { count: 'exact' })
         .limit(200)
         .order('created_at', { ascending: false });
     if (title) {
-        query.ilike('title', `%${title}%`);
-        return query;
+        query = query.ilike('title', `%${title}%`);
+        // return query;
     }
-    return query;
+    if (category) {
+        query = query.ilike('category', `%${category}%`);
+        // return query;
+    }
+    const response = await query;
+    return response;
+    // return query;
 }
 
 export async function getPost(id) {
@@ -77,4 +83,9 @@ export async function getPost(id) {
 
 export async function createComment(comment) {
     return await client.from('comments').insert(comment).single();
+}
+
+export async function deleteComment(id) {
+    // return await client.from('comments').delete().eq('id', id).single();
+    return await client.from('comments').delete().eq('id', id).single();
 }

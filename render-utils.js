@@ -39,9 +39,28 @@ function categoryEmoji(category) {
 }
 
 export function renderComment(comment) {
+    // let error = null;
     const li = document.createElement('li');
 
+    li.classList.add('flex-comment');
+
     li.textContent = comment.text;
+
+    // const btn = document.createElement('button');
+    // btn.textContent = 'delete';
+    // btn.classList.add('delete-cmt-btn');
+    // btn.addEventListener('click', async () => {
+    //     const response = await deleteComment(comment.id);
+    //     error = response.error;
+    //     if (error) {
+    //         displayError();
+    //     } else {
+    //         const index = comments.indexOf(comment);
+    //         comments.splice(index, 1);
+    //         displayComments();
+    //     }
+    // });
+    // li.append(btn);
 
     return li;
 }
