@@ -1,6 +1,7 @@
 /* Imports */
 // this will check if we have a user and set signout link if it exists
 import './auth/user.js';
+import { getUser } from './fetch-utils.js';
 import { getPost, getPosts } from './fetch-utils.js';
 import { renderPost } from './render-utils.js';
 
@@ -17,7 +18,8 @@ window.addEventListener('load', async () => {
     //    - get the pets
     //    - store the error and pets state from the response
     //    - either display the error or the pets
-
+    const user = getUser();
+    console.log(user.email);
     findPosts();
     displayPosts();
     // const response = await getPosts();

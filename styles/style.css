@@ -52,3 +52,13 @@
 .contact-info {
     font-weight: 700;
 }
+
+.delete-button {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    margin: 20px;
+    border: 2px solid black;
+    box-shadow: 2px 2px 10px 0px black;
+    padding: 3px 8px;
+    border-radius: 0.5em;
+}

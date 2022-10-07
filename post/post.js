@@ -97,7 +97,6 @@ function displayComments() {
             });
         } else {
             commentList.append(commentEl);
-            // displayComments();
         }
     }
 }
