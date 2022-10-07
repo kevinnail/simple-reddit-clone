@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- metadata -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- title and favicon -->
+        <title>Glass It Up</title>
+        <link rel="icon" type="image/x-icon" href="/assets/alchemy-favicon.png" />
+
+        <!-- js -->
+        <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+        <script type="module" src="post.js"></script>
+
+        <!-- fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&family=Titillium+Web:wght@200;400;600;800&display=swap"
+        />
+
+        <!-- css -->
+        <link rel="stylesheet" href="/styles/reset.css" />
+        <link rel="stylesheet" href="/styles/global.css" />
+        <link rel="stylesheet" href="/styles/form.css" />
+        <link rel="stylesheet" href="post.css" />
+        <!-- add link for page specific css -->
+    </head>
+
+    <body>
+        <header class="page-header">
+            <img class="logo" src="/assets/sherlock.jpeg" alt="logo" />
+            <p class="title">Glass It Up</p>
+            <nav>
+                <a href="/post-editor">Add Post</a>
+                <a href="/">Home</a>
+                <a id="sign-out-link" href="/auth">Sign Out</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="post-container">
+                <ul class="single-post">
+                    <li>
+                        <h3 id="title" class="heading">Title</h3>
+                        <p id="description" class="description"></p>
+                        <p id="contact" class="description"></p>
+                    </li>
+                    <li class="image-center">
+                        <img id="image" class="image-size" src="/assets/place-holder.png" />
+                    </li>
+                    <li>
+                        <h5 id="category" class="heading">Category</h5>
+                    </li>
+                </ul>
+                <p id="error-display" class="error"></p>
+
+                <div>
+                    <form id="add-comment-form" class="inline">
+                        <input name="text" placeholder="add a comment..." />
+                        <button>Comment</button>
+                    </form>
+                </div>
+
+                <ul id="comment-list"></ul>
+            </section>
+        </main>
+        <footer></footer>
+    </body>
+</html>
