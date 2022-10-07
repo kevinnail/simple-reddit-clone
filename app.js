@@ -72,7 +72,7 @@ searchForm.addEventListener('submit', (e) => {
     //     findPosts();
     //     console.log(posts.length);
     // }
-    console.log('title ' + title + ' category ' + category);
+    // console.log('title ' + title + ' category ' + category);
     findPosts(title, category);
 });
 

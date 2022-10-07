@@ -74,25 +74,31 @@ function displayComments() {
     for (const comment of post.comments) {
         // const commentEl = renderComment(comment, user.id);
         const commentEl = renderComment(comment);
-        const btn = document.createElement('button');
-        btn.textContent = 'delete';
-        btn.classList.add('delete-cmt-btn');
 
-        commentEl.append(btn);
-        commentList.append(commentEl);
+        // console.log('comment.user_id ' + comment.user_id);
+        // console.log('post.user_id ' + post.user_id);
 
-        btn.addEventListener('click', async () => {
-            const response = await deleteComment(comment.id);
-            error = response.error;
-            if (error) {
-                displayError();
-            } else {
-                // alert('else');
-                const index = post.comments.indexOf(comment);
-                post.comments.splice(index, 1);
-                displayComments();
-            }
-        });
+        if (user.id === comment.user_id) {
+            const btn = document.createElement('button');
+            btn.textContent = 'delete';
+            btn.classList.add('delete-cmt-btn');
+            commentEl.append(btn);
+            commentList.append(commentEl);
+            btn.addEventListener('click', async () => {
+                const response = await deleteComment(comment.id);
+                error = response.error;
+                if (error) {
+                    displayError();
+                } else {
+                    const index = post.comments.indexOf(comment);
+                    post.comments.splice(index, 1);
+                    displayComments();
+                }
+            });
+        } else {
+            commentList.append(commentEl);
+            // displayComments();
+        }
     }
 }
 
