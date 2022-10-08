@@ -13,24 +13,33 @@ const errorDisplay = document.getElementById('error-display');
 const userNameInput = profileForm.querySelector('[name=username]');
 const emailTextArea = profileForm.querySelector('[name=email]');
 const profileName = document.getElementById('profile-name');
-const imageInput = document.getElementById('avatar_url');
+const imageInput = document.getElementById('image-input');
 const preview = document.getElementById('preview');
+const userAvatar = document.getElementById('user-avatar');
 
 /*  state */
+
 let profile = null;
 let error = null;
 const user = getUser();
-let url = null;
+// let url = null;
 /* events */
 
 window.addEventListener('load', async () => {
     // > Part B:
     //      - get the profile based on user.id
     //      - set profile and error state from response object
+
+    // findPosts();
+    // displayPosts();
+    // const user = getUser();
+    // const profile = await getProfile(user.id);
+    // profileName.textContent = '  ' + profile.data.username;
+
     const response = await getProfile(user.id);
     error = response.error;
     profile = response.data;
-
+    userAvatar.src = profile.url;
     if (error) {
         displayError();
     }
@@ -68,11 +77,14 @@ profileForm.addEventListener('submit', async (e) => {
     const imagePath = `profile-pics/${randomFolder}/${imageFile.name}`;
     url = await uploadImage2('project-images', imagePath, imageFile);
 
+    console.log('url:  ' + url);
+    alert('hi');
     const profileUpdate = {
         username: formData.get('username'),
         email: formData.get('email'),
         image_url: url,
     };
+    alert('profileUpdate: ' + profileUpdate.image_url);
     //      - call updateProfile passing in profile update object, capture the response
     // const response = null; // ??????
     const response = await updateProfile(profileUpdate);

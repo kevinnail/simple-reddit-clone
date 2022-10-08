@@ -10,6 +10,7 @@ const postList = document.getElementById('post-list');
 const errorDisplay = document.getElementById('error-display');
 const searchForm = document.getElementById('search-form');
 const profileName = document.getElementById('profile-name');
+const userAvatar = document.getElementById('user-avatar');
 /* State */
 let error = null;
 let posts = [];
@@ -26,7 +27,7 @@ window.addEventListener('load', async () => {
     const user = getUser();
     const profile = await getProfile(user.id);
     profileName.textContent = '  ' + profile.data.username;
-
+    userAvatar.src = profile.data.url;
     // const response = await getPosts();
     // error = response.error;
     // posts = response.data;

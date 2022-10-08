@@ -118,7 +118,7 @@ export async function updateProfile(profile) {
     const user = getUser();
     const response = await client
         .from('profiles')
-        .update({ email: profile.email, username: profile.username })
+        .update({ email: profile.email, username: profile.username, url: profile.image_url })
         .match({ user_id: user.id });
     return response;
 }

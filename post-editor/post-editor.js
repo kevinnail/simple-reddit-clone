@@ -8,6 +8,7 @@ const imageInput = document.getElementById('image-input');
 const preview = document.getElementById('preview');
 const addButton = document.getElementById('add-button');
 const profileName = document.getElementById('profile-name');
+const userAvatar = document.getElementById('user-avatar');
 /* State */
 let error = null;
 /* Events */
@@ -16,6 +17,7 @@ window.addEventListener('load', async () => {
     const user = getUser();
     const profile = await getProfile(user.id);
     profileName.textContent = '  ' + profile.data.username;
+    userAvatar.src = profile.data.url;
 });
 
 imageInput.addEventListener('change', () => {
