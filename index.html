@@ -33,7 +33,7 @@
         <header class="page-header">
             <img class="logo" src="/assets/sherlock.jpeg" alt="logo" />
             <p class="title">Glass It Up</p>
-            <form id="search-form">
+            <form id="search-form" style="">
                 <input name="title" placeholder="title" />
                 <select id="category-select" name="category">
                     <option value="">choose category</option>
@@ -47,6 +47,10 @@
                 </select>
                 <button>🔍</button>
             </form>
+
+            <p class="logged-in-as" style="">You are logged in as:</p>
+            <p id="profile-name"></p>
+
             <nav>
                 <a href="/profile/">Profile</a>
                 <a href="/post-editor">Add Post</a>

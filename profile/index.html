@@ -33,11 +33,12 @@
     <body>
         <header class="page-header">
             <img class="logo" src="../assets/sherlock.jpeg" />
-            <p class="title">Users</p>
+            <p class="title">Glass It Up</p>
+            <p class="logged-in-as" style="">You are logged in as:</p>
+            <p id="profile-name"></p>
             <nav>
                 <a href="../">Home</a>
-                <a href="../users">Users</a>
-                <a href="./">My Profile</a>
+                <a href="/post-editor">Add Post</a>
                 <img class="avatar" id="user-avatar" alt="user avatar" src="../assets/avatar.jpg" />
                 <a id="sign-out-link" href="../auth">Sign Out</a>
             </nav>
@@ -52,21 +53,12 @@
 
                 <label>
                     <div>Email</div>
-                    <textarea
-                        name="email"
-                        required
-                        placeholder="more details about you..."
-                    ></textarea>
+                    <textarea name="email" required placeholder="more details about you..."></textarea>
                 </label>
                 <label>
                     <div>Avatar</div>
                     <input type="file" name="avatar_url" placeholder="upload an image..." />
-                    <img
-                        id="preview"
-                        class="avatar"
-                        alt="avatar preview"
-                        src="../assets/avatar.jpg"
-                    />
+                    <img id="preview" class="avatar" alt="avatar preview" src="../assets/avatar.jpg" />
                 </label>
 
                 <button id="update-button">Update Profile</button>

@@ -62,3 +62,14 @@
     padding: 3px 8px;
     border-radius: 0.5em;
 }
+
+#profile-name {
+    color: rgb(198, 255, 119);
+    font-weight: bold;
+    font-size: 2em;
+    text-shadow: 5px 5px 10px black;
+    margin-left: 5px;
+}
+.logged-in-as {
+    margin-left: 100px;
+}

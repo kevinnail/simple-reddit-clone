@@ -1,16 +1,24 @@
 /* Imports */
 import '../auth/user.js';
-import { uploadImage, createPost } from '../fetch-utils.js';
+import { uploadImage, createPost, getProfile, getUser } from '../fetch-utils.js';
 /* DOM */
 const postForm = document.getElementById('post-form');
 const errorDisplay = document.getElementById('error-display');
 const imageInput = document.getElementById('image-input');
 const preview = document.getElementById('preview');
 const addButton = document.getElementById('add-button');
-
+const profileName = document.getElementById('profile-name');
 /* State */
 let error = null;
 /* Events */
+
+window.addEventListener('load', async () => {
+    const user = getUser();
+    const profile = await getProfile(user.id);
+    console.log(profile.data.username);
+    profileName.textContent = '  ' + profile.data.username;
+});
+
 imageInput.addEventListener('change', () => {
     const file = imageInput.files[0];
     if (file) {

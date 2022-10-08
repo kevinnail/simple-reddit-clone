@@ -34,9 +34,11 @@
         <header class="page-header">
             <img class="logo" src="/assets/sherlock.jpeg" alt="logo" />
             <p class="title">Glass It Up</p>
+            <p class="logged-in-as" style="">You are logged in as:</p>
+            <p id="profile-name"></p>
             <nav>
-                <a href="/post-editor">Add Post</a>
                 <a href="/">Home</a>
+                <a href="/profile">Profile</a>
                 <a id="sign-out-link" href="/auth">Sign Out</a>
             </nav>
         </header>
@@ -78,12 +80,7 @@
                         placeholder="upload an image..."
                     />
                 </label>
-                <img
-                    id="preview"
-                    class="preview"
-                    alt="avatar review"
-                    src="../assets/place-holder.png"
-                />
+                <img id="preview" class="preview" alt="avatar review" src="../assets/place-holder.png" />
                 <label>
                     <div class="div-post-editor">Contact Info</div>
                     <textarea name="contact" placeholder="Enter contact info..."></textarea>

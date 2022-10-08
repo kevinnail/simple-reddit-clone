@@ -12,7 +12,7 @@ const profileForm = document.getElementById('profile-form');
 const errorDisplay = document.getElementById('error-display');
 const userNameInput = profileForm.querySelector('[name=username]');
 const emailTextArea = profileForm.querySelector('[name=email]');
-
+const profileName = document.getElementById('profile-name');
 /*  state */
 let profile = null;
 let error = null;
@@ -26,10 +26,12 @@ window.addEventListener('load', async () => {
     const response = await getProfile(user.id);
     error = response.error;
     profile = response.data;
+
     if (error) {
         displayError();
     }
     if (profile) {
+        profileName.textContent = profile.username;
         displayProfile();
     }
 });
@@ -67,8 +69,7 @@ profileForm.addEventListener('submit', async (e) => {
         updateButton.textContent = buttonText; ////////////////////
     } else {
         // > Part A: uncomment when working to redirect user
-        // location.assign('../');
-        console.log('line 71 profile.js: redirect to home page');
+        location.assign('../');
     }
 });
 
