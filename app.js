@@ -18,8 +18,8 @@ window.addEventListener('load', async () => {
     //    - get the pets
     //    - store the error and pets state from the response
     //    - either display the error or the pets
-    const user = getUser();
-    console.log(user.email);
+    // const user = getUser();
+
     findPosts();
     displayPosts();
     // const response = await getPosts();

@@ -96,12 +96,10 @@ export async function updateProfile(profile) {
     // > Part A: upsert into profiles table
     // const response = await client.from('profiles').upsert(profile).single();
 
-    console.log(profile.email);
-
     const user = getUser();
     const response = await client
         .from('profiles')
-        .update({ email: profile.email })
+        .update({ email: profile.email, username: profile.username })
         .match({ user_id: user.id });
     return response;
 }

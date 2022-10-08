@@ -11,7 +11,7 @@ const updateButton = document.getElementById('update-button');
 const profileForm = document.getElementById('profile-form');
 const errorDisplay = document.getElementById('error-display');
 const userNameInput = profileForm.querySelector('[name=username]');
-const bioTextArea = profileForm.querySelector('[name=email]');
+const emailTextArea = profileForm.querySelector('[name=email]');
 
 /*  state */
 let profile = null;
@@ -42,9 +42,9 @@ profileForm.addEventListener('submit', async (e) => {
     // reset the error
     errorDisplay.textContent = '';
     // remember the button text
-    // const buttonText = updateButton.textContent;
+    const buttonText = updateButton.textContent;
     // disabled button and change to "saving..."
-    // updateButton.disabled = true;
+    updateButton.disabled = true;
 
     // create a form data object for easy access to form values
     const formData = new FormData(profileForm);
@@ -62,22 +62,22 @@ profileForm.addEventListener('submit', async (e) => {
         // display the error
         displayError();
         // reset the button to be active
-        // updateButton.disabled = false;/////////////////////////
+        updateButton.disabled = false; /////////////////////////
         // restore the button text to what it was
-        // updateButton.textContent = buttonText;////////////////////
+        updateButton.textContent = buttonText; ////////////////////
     } else {
         // > Part A: uncomment when working to redirect user
         // location.assign('../');
-        alert('else');
+        console.log('line 71 profile.js: redirect to home page');
     }
 });
 
 function displayProfile() {
     // > Part B: update user name and bio from profile object
-    console.log('profile username: ' + profile.username);
-    console.log('profile email:  ' + profile.email);
+    // console.log('profile username: ' + profile.username);
+    // console.log('profile email:  ' + profile.email);
     userNameInput.value = profile.username;
-    bioTextArea.value = profile.email;
+    emailTextArea.value = profile.email;
 }
 
 function displayError() {
