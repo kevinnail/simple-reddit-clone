@@ -15,7 +15,6 @@ let error = null;
 window.addEventListener('load', async () => {
     const user = getUser();
     const profile = await getProfile(user.id);
-    console.log(profile.data.username);
     profileName.textContent = '  ' + profile.data.username;
 });
 

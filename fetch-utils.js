@@ -52,6 +52,25 @@ export async function uploadImage(bucketName, imagePath, imageFile) {
 
     return url;
 }
+export async function uploadImage2(bucketName, imagePath, imageFile) {
+    const bucket = client.storage.from(bucketName);
+    let url = null;
+    const response = await bucket.upload(imagePath, imageFile, {
+        cacheControl: '3600',
+        // in this case, we will _replace_ any
+        // existing file with same name.
+        upsert: true,
+    });
+
+    if (response.error) {
+        return null;
+    }
+
+    // Construct the URL to this image:
+    url = `${SUPABASE_URL}/storage/v1/object/public/${response.data.Key}`;
+
+    return url;
+}
 
 export async function getPosts(title, category) {
     let query = client

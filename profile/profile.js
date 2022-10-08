@@ -1,6 +1,6 @@
 /*   imports   */
 import '../auth/user.js';
-import { updateProfile, getProfile, getUser } from '../fetch-utils.js';
+import { updateProfile, getProfile, getUser, uploadImage2 } from '../fetch-utils.js';
 // import { updateProfile } from '../fetch-utils.js';
 
 // const user = getUser();
@@ -13,10 +13,14 @@ const errorDisplay = document.getElementById('error-display');
 const userNameInput = profileForm.querySelector('[name=username]');
 const emailTextArea = profileForm.querySelector('[name=email]');
 const profileName = document.getElementById('profile-name');
+const imageInput = document.getElementById('avatar_url');
+const preview = document.getElementById('preview');
+
 /*  state */
 let profile = null;
 let error = null;
 const user = getUser();
+let url = null;
 /* events */
 
 window.addEventListener('load', async () => {
@@ -35,7 +39,14 @@ window.addEventListener('load', async () => {
         displayProfile();
     }
 });
-
+imageInput.addEventListener('change', () => {
+    const file = imageInput.files[0];
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+    } else {
+        preview.src = '../assets/pet-photo-placeholder.png';
+    }
+});
 profileForm.addEventListener('submit', async (e) => {
     // keep the form from changing the browser page
     e.preventDefault();
@@ -50,9 +61,17 @@ profileForm.addEventListener('submit', async (e) => {
 
     // create a form data object for easy access to form values
     const formData = new FormData(profileForm);
+
+    const imageFile = formData.get('image');
+    let url = null;
+    const randomFolder = Math.floor(Date.now() * Math.random());
+    const imagePath = `profile-pics/${randomFolder}/${imageFile.name}`;
+    url = await uploadImage2('project-images', imagePath, imageFile);
+
     const profileUpdate = {
         username: formData.get('username'),
         email: formData.get('email'),
+        image_url: url,
     };
     //      - call updateProfile passing in profile update object, capture the response
     // const response = null; // ??????

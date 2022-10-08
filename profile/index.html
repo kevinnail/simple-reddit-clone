@@ -36,10 +36,10 @@
             <p class="title">Glass It Up</p>
             <p class="logged-in-as" style="">You are logged in as:</p>
             <p id="profile-name"></p>
+            <img class="avatar" id="user-avatar" alt="user avatar" src="../assets/avatar.jpg" />
             <nav>
                 <a href="../">Home</a>
                 <a href="/post-editor">Add Post</a>
-                <img class="avatar" id="user-avatar" alt="user avatar" src="../assets/avatar.jpg" />
                 <a id="sign-out-link" href="../auth">Sign Out</a>
             </nav>
         </header>
@@ -57,7 +57,7 @@
                 </label>
                 <label>
                     <div>Avatar</div>
-                    <input type="file" name="avatar_url" placeholder="upload an image..." />
+                    <input type="file" id="avatar_url" name="image" placeholder="upload an image..." />
                     <img id="preview" class="avatar" alt="avatar preview" src="../assets/avatar.jpg" />
                 </label>
 

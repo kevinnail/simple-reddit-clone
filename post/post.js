@@ -1,6 +1,6 @@
 /*  Imports */
 import '../auth/user.js';
-import { getPost, createComment, getUser, deleteComment } from '../fetch-utils.js';
+import { getPost, createComment, getUser, deleteComment, getProfile } from '../fetch-utils.js';
 import { renderComment } from '../render-utils.js';
 
 /* DOM */
@@ -12,14 +12,20 @@ const postContact = document.getElementById('contact');
 const commentList = document.getElementById('comment-list');
 const addCommentForm = document.getElementById('add-comment-form');
 const errorDisplay = document.getElementById('error-display');
+const profileName = document.getElementById('profile-name');
 
 /*  State  */
+let profile = null;
 let error = null;
 let post = null;
 const user = getUser();
 
 /* Events */
 window.addEventListener('load', async () => {
+    const response2 = await getProfile(user.id);
+    error = response2.error;
+    profile = response2.data;
+
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get('id');
     if (!id) {
@@ -34,8 +40,10 @@ window.addEventListener('load', async () => {
     } else {
         displayPost();
         displayComments();
+        profileName.textContent = profile.username;
     }
 });
+
 addCommentForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addCommentForm);
