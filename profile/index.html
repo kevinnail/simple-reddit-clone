@@ -47,9 +47,17 @@
             <form id="profile-form">
                 <label>
                     <div>Username</div>
-                    <input name="user_name" required placeholder="choose a username..." />
+                    <input name="username" required placeholder="choose a username..." />
                 </label>
 
+                <label>
+                    <div>Email</div>
+                    <textarea
+                        name="email"
+                        required
+                        placeholder="more details about you..."
+                    ></textarea>
+                </label>
                 <label>
                     <div>Avatar</div>
                     <input type="file" name="avatar_url" placeholder="upload an image..." />
@@ -59,15 +67,6 @@
                         alt="avatar preview"
                         src="../assets/avatar.jpg"
                     />
-                </label>
-
-                <label>
-                    <div>Bio</div>
-                    <textarea
-                        name="bio"
-                        required
-                        placeholder="more details about you..."
-                    ></textarea>
                 </label>
 
                 <button>Update Profile</button>
