@@ -52,7 +52,7 @@ export function renderComment(comment) {
 
     const span2 = document.createElement('div');
     span2.classList.add('date-span');
-    span2.textContent = 'posted by ' + comment.username + ' on ' + comment.date;
+    span2.textContent = 'posted by ' + comment.username + ' at ' + comment.time;
 
     span.append(span2);
     li.append(span);

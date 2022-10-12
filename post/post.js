@@ -51,16 +51,43 @@ addCommentForm.addEventListener('submit', async (e) => {
     let cDay = currentDate.getDate();
     let cMonth = currentDate.getMonth() + 1;
     let cYear = currentDate.getFullYear();
+    // let commentDate = cMonth + '/' + cDay + '/' + cYear;
 
-    let commentDate = cMonth + '/' + cDay + '/' + cYear;
+    /////////////////////////////////////////// time below  ////////////////////////////////////////
+    // let currentTime = new Date();
+    // let time = currentTime.getHours() + ':' + currentTime.getMinutes() + ':' + currentTime.getSeconds();
+
+    //////////////////////////////////
+
+    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    let d = new Date();
+    let day = days[d.getDay()];
+    let hr = d.getHours();
+    let min = d.getMinutes();
+    if (min < 10) {
+        min = '0' + min;
+    }
+    let ampm = 'am';
+    if (hr > 12) {
+        hr -= 12;
+        ampm = 'pm';
+    }
+    let date = d.getDate();
+    let month = months[d.getMonth()];
+    let year = d.getFullYear();
+    // let x = document.getElementById('time');
+    let time = day + ' ' + hr + ':' + min + ampm + ' ' + month + ' ' + date + ' ' + year;
+    //////////////////////////////////
     const insertComment = {
         // maybe add a username column to the table then append that data to the comment "posted by..>"
         text: formData.get('text'),
         post_id: post.id,
         username: profile.username,
-        date: commentDate,
+        // date: commentDate,
+        time: time,
     };
-
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
     const response = await createComment(insertComment);
     error = response.error;
     if (error) {
