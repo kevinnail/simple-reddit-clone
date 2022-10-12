@@ -128,3 +128,8 @@ export async function getProfile(id) {
     const response = await client.from('profiles').select('*').eq('user_id', id).single();
     return response;
 }
+
+// export async function updateJoy(id, joyed) {
+//     const response = await client.from('profiles').select('*').eq('user_id', id).single();
+//     return response;
+// }

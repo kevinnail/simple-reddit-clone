@@ -71,5 +71,22 @@
     margin-left: 5px;
 } */
 .logged-in-as {
-    margin-left: 100px;
+    text-shadow: 5px 5px 10px black;
+}
+#search-form {
+    width: 400px;
+    height: 70px;
+}
+#search-input {
+    background-color: black;
+    height: 30px;
+    color: white;
+}
+#category-select {
+    background-color: black;
+    height: 30px;
+    color: white;
+}
+#search-button {
+    height: 30px;
 }

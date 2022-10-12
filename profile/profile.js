@@ -77,14 +77,11 @@ profileForm.addEventListener('submit', async (e) => {
     const imagePath = `profile-pics/${randomFolder}/${imageFile.name}`;
     url = await uploadImage2('project-images', imagePath, imageFile);
 
-    console.log('url:  ' + url);
-    alert('hi');
     const profileUpdate = {
         username: formData.get('username'),
         email: formData.get('email'),
         image_url: url,
     };
-    alert('profileUpdate: ' + profileUpdate.image_url);
     //      - call updateProfile passing in profile update object, capture the response
     // const response = null; // ??????
     const response = await updateProfile(profileUpdate);
@@ -109,6 +106,7 @@ function displayProfile() {
     // console.log('profile username: ' + profile.username);
     // console.log('profile email:  ' + profile.email);
     userNameInput.value = profile.username;
+    // emailTextArea.value = profile.email;
     emailTextArea.value = profile.email;
 }
 

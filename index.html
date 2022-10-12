@@ -33,8 +33,8 @@
         <header class="page-header">
             <img class="logo" src="/assets/sherlock.jpeg" alt="logo" />
             <p class="title">Glass It Up</p>
-            <form id="search-form" style="">
-                <input name="title" placeholder="title" />
+            <form id="search-form" style="display: flex">
+                <input id="search-input" name="title" placeholder="search by title" />
                 <select id="category-select" name="category">
                     <option value="">choose category</option>
                     <option value="Dry-pieces">Dry Pieces</option>
@@ -45,7 +45,7 @@
                     <option value="Goblets">Goblets</option>
                     <option value="Misc">Misc</option>
                 </select>
-                <button>🔍</button>
+                <button id="search-button">🔍</button>
             </form>
 
             <p class="logged-in-as" style="">You are logged in as:</p>

@@ -1,3 +1,5 @@
+import { getProfile } from './fetch-utils.js';
+
 export function renderPost(post) {
     const li = document.createElement('li');
 
@@ -39,12 +41,21 @@ function categoryEmoji(category) {
 }
 
 export function renderComment(comment) {
-    // let error = null;
     const li = document.createElement('li');
-
     li.classList.add('flex-comment');
 
-    li.textContent = comment.text;
+    // li.textContent = comment.text;
+    // ^^^^^^^^^^^ works
+    const span = document.createElement('div');
+    span.classList.add('comment-span');
+    span.textContent = comment.text;
+
+    const span2 = document.createElement('div');
+    span2.classList.add('date-span');
+    span2.textContent = 'posted by ' + comment.username + ' on ' + comment.date;
+
+    span.append(span2);
+    li.append(span);
 
     // const btn = document.createElement('button');
     // btn.textContent = 'delete';

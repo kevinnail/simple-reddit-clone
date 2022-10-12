@@ -47,9 +47,18 @@ window.addEventListener('load', async () => {
 addCommentForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addCommentForm);
+    let currentDate = new Date();
+    let cDay = currentDate.getDate();
+    let cMonth = currentDate.getMonth() + 1;
+    let cYear = currentDate.getFullYear();
+
+    let commentDate = cMonth + '/' + cDay + '/' + cYear;
     const insertComment = {
+        // maybe add a username column to the table then append that data to the comment "posted by..>"
         text: formData.get('text'),
         post_id: post.id,
+        username: profile.username,
+        date: commentDate,
     };
 
     const response = await createComment(insertComment);
@@ -80,11 +89,32 @@ function displayPost() {
 function displayComments() {
     commentList.innerHTML = '';
     for (const comment of post.comments) {
-        // const commentEl = renderComment(comment, user.id);
-        const commentEl = renderComment(comment);
+        const commentEl = renderComment(comment, profile.username);
 
-        // console.log('comment.user_id ' + comment.user_id);
-        // console.log('post.user_id ' + post.user_id);
+        // const commentEl = renderComment(comment);
+
+        // ^^^ works
+
+        // const joyBtn = document.createElement('button');
+        // joyBtn.textContent = 'spark joy';
+        // joyBtn.classList.add('joy-btn');
+        // commentEl.append(joyBtn);
+        // commentList.append(commentEl);
+        // joyBtn.addEventListener('click', async () => {
+        //     const response = await updateJoy(comment.id);
+
+        //     joyBtn.classList.toggle('joy-cmt-joyBtn');
+        //     if (joyBtn.textContent === 'spark joy') {
+        //         joyBtn.textContent = '!!!!!!!';
+        //     } else {
+        //         joyBtn.textContent = 'spark joy';
+        //     }
+
+        // joyBtn.textContent = '!!!!!!!';
+        // const response = await updateJoy(comment.id);
+        // });
+
+        // vvv works
 
         if (user.id === comment.user_id) {
             const btn = document.createElement('button');
