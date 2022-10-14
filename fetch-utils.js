@@ -52,6 +52,7 @@ export async function uploadImage(bucketName, imagePath, imageFile) {
 
     return url;
 }
+
 export async function uploadImage2(bucketName, imagePath, imageFile) {
     const bucket = client.storage.from(bucketName);
     let url = null;
@@ -128,7 +129,13 @@ export async function getProfile(id) {
     const response = await client.from('profiles').select('*').eq('user_id', id).single();
     return response;
 }
+export async function getComment(id) {
+    return await client.from('comments').select(`*`).eq('id', id).single();
+}
 
+export function onMessage(postId, handleComment) {
+    client.from(`comments:post_id=eq.${postId}`).on('INSERT', handleComment).subscribe();
+}
 // export async function updateJoy(id, joyed) {
 //     const response = await client.from('profiles').select('*').eq('user_id', id).single();
 //     return response;

@@ -1,6 +1,14 @@
 /*  Imports */
 import '../auth/user.js';
-import { getPost, createComment, getUser, deleteComment, getProfile } from '../fetch-utils.js';
+import {
+    getPost,
+    createComment,
+    getUser,
+    deleteComment,
+    getProfile,
+    onMessage,
+    getComment,
+} from '../fetch-utils.js';
 import { renderComment } from '../render-utils.js';
 
 /* DOM */
@@ -25,7 +33,6 @@ window.addEventListener('load', async () => {
     const response2 = await getProfile(user.id);
     error = response2.error;
     profile = response2.data;
-
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get('id');
     if (!id) {
@@ -42,22 +49,35 @@ window.addEventListener('load', async () => {
         displayComments();
         profileName.textContent = profile.username;
     }
+
+    onMessage(post.id, async (payload) => {
+        const commentId = payload.new.id;
+        const commentResponse = await getComment(commentId);
+        error = commentResponse.error;
+        if (error) {
+            displayError();
+        } else {
+            const comment = commentResponse.data;
+            post.comments.unshift(comment);
+            displayComments();
+        }
+    });
 });
 
 addCommentForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addCommentForm);
-    let currentDate = new Date();
-    let cDay = currentDate.getDate();
-    let cMonth = currentDate.getMonth() + 1;
-    let cYear = currentDate.getFullYear();
+    // let currentDate = new Date();
+    // let cDay = currentDate.getDate();
+    // let cMonth = currentDate.getMonth() + 1;
+    // let cYear = currentDate.getFullYear();
     // let commentDate = cMonth + '/' + cDay + '/' + cYear;
 
     /////////////////////////////////////////// time below  ////////////////////////////////////////
     // let currentTime = new Date();
     // let time = currentTime.getHours() + ':' + currentTime.getMinutes() + ':' + currentTime.getSeconds();
 
-    //////////////////////////////////
+    ////////////////////////////////// date/ time getting/ formatting day w/ am/ pm mth/ yr
 
     let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -65,6 +85,7 @@ addCommentForm.addEventListener('submit', async (e) => {
     let day = days[d.getDay()];
     let hr = d.getHours();
     let min = d.getMinutes();
+
     if (min < 10) {
         min = '0' + min;
     }
@@ -93,8 +114,8 @@ addCommentForm.addEventListener('submit', async (e) => {
     if (error) {
         displayError();
     } else {
-        const comment = response.data;
-        post.comments.unshift(comment);
+        // const comment = response.data;
+        // post.comments.unshift(comment);
         displayComments();
         addCommentForm.reset();
     }
@@ -116,7 +137,7 @@ function displayPost() {
 function displayComments() {
     commentList.innerHTML = '';
     for (const comment of post.comments) {
-        const commentEl = renderComment(comment, profile.username);
+        const commentEl = renderComment(comment);
 
         // const commentEl = renderComment(comment);
 

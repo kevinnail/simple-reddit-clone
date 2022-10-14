@@ -46,16 +46,21 @@ export function renderComment(comment) {
 
     // li.textContent = comment.text;
     // ^^^^^^^^^^^ works
-    const span = document.createElement('div');
-    span.classList.add('comment-span');
-    span.textContent = comment.text;
+    const div = document.createElement('div');
+    div.classList.add('comment-span');
+
+    const p = document.createElement('p');
+    p.textContent = comment.text;
+    // div.textContent = comment.text;
+
+    div.append(p);
 
     const span2 = document.createElement('div');
     span2.classList.add('date-span');
-    span2.textContent = 'posted by ' + comment.username + ' at ' + comment.time;
+    span2.textContent = '   posted by ' + comment.username + ' at ' + comment.time;
 
-    span.append(span2);
-    li.append(span);
+    div.append(span2);
+    li.append(div);
 
     // const btn = document.createElement('button');
     // btn.textContent = 'delete';

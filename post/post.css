@@ -159,11 +159,10 @@ main {
 }
 
 .date-span {
+    display: block;
     font-size: 0.9rem;
     color: rgb(0, 0, 0);
     font-weight: bold;
     text-shadow: 0px 0px 5px white;
     display: inline-block;
-    grid-column-start: 1;
-    grid-column-end: 2;
 }
