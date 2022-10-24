@@ -129,13 +129,26 @@ export async function getProfile(id) {
     const response = await client.from('profiles').select('*').eq('user_id', id).single();
     return response;
 }
+
+export async function getComments() {
+    let query = client.from('comments').select('*').limit(200).order('created_at', { ascending: false });
+    const response = await query;
+    return response;
+}
+
 export async function getComment(id) {
     return await client.from('comments').select(`*`).eq('id', id).single();
 }
 
-export function onMessage(postId, handleComment) {
-    client.from(`comments:post_id=eq.${postId}`).on('INSERT', handleComment).subscribe();
+export async function onMessage(postId, handleComment) {
+    return await client
+        .from(`comments:post_id=eq.${postId}`)
+        .on('INSERT', handleComment)
+        .on('DELETE', handleComment)
+        .subscribe();
+    // client.from(`comments:post_id=eq.${postId}`).on('DELETE', handleComment).subscribe();
 }
+
 // export async function updateJoy(id, joyed) {
 //     const response = await client.from('profiles').select('*').eq('user_id', id).single();
 //     return response;

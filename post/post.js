@@ -8,6 +8,7 @@ import {
     getProfile,
     onMessage,
     getComment,
+    getComments,
 } from '../fetch-utils.js';
 import { renderComment } from '../render-utils.js';
 
@@ -27,6 +28,7 @@ let profile = null;
 let error = null;
 let post = null;
 const user = getUser();
+let comments = null;
 
 /* Events */
 window.addEventListener('load', async () => {
@@ -51,15 +53,23 @@ window.addEventListener('load', async () => {
     }
 
     onMessage(post.id, async (payload) => {
-        const commentId = payload.new.id;
-        const commentResponse = await getComment(commentId);
-        error = commentResponse.error;
-        if (error) {
-            displayError();
-        } else {
-            const comment = commentResponse.data;
-            post.comments.unshift(comment);
-            displayComments();
+        {
+            if (payload.eventType === 'INSERT') {
+                const commentId = payload.new.id;
+                const commentResponse = await getComment(commentId);
+                error = commentResponse.error;
+                if (error) {
+                    displayError();
+                } else {
+                    const comment = commentResponse.data;
+                    post.comments.unshift(comment);
+                    displayComments();
+                }
+            } else {
+                const superData = await getPost(post.id);
+                post.comments = superData.data.comments;
+                displayComments();
+            }
         }
     });
 });
@@ -134,8 +144,9 @@ function displayPost() {
     postImage.src = post.image_url;
     postImage.alt = `${post.name} image`;
 }
-function displayComments() {
+async function displayComments() {
     commentList.innerHTML = '';
+
     for (const comment of post.comments) {
         const commentEl = renderComment(comment);
 
@@ -173,6 +184,7 @@ function displayComments() {
             btn.addEventListener('click', async () => {
                 const response = await deleteComment(comment.id);
                 error = response.error;
+
                 if (error) {
                     displayError();
                 } else {
