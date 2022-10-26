@@ -43,6 +43,14 @@ body {
     font-size: 1.3em;
     font-weight: 800;
     flex-grow: 2;
+    text-decoration: none;
+}
+
+#logo-link {
+    display: flex;
+    text-decoration: none;
+    gap: 10px;
+    align-items: center;
 }
 
 .page-header nav {
