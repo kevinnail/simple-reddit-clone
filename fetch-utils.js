@@ -105,6 +105,13 @@ export async function createComment(comment) {
     return await client.from('comments').insert(comment).single();
 }
 
+export async function deletePost(id) {
+    // return await client.from('comments').delete().eq('id', id).single();
+    // console.log('deletePost firing this id:', id);
+
+    return await client.from('posts').delete().eq('id', id).single();
+}
+
 export async function deleteComment(id) {
     // return await client.from('comments').delete().eq('id', id).single();
     return await client.from('comments').delete().eq('id', id).single();

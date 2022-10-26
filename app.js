@@ -23,9 +23,18 @@ window.addEventListener('load', async () => {
     //    - store the error and pets state from the response
     //    - either display the error or the pets
     // const user = getUser();
+    const user = getUser();
+    const profile = await getProfile(user.id);
+    profileName.textContent = '  ' + profile.data.username;
+    userAvatar.src = profile.data.url;
 
     const searchParams = new URLSearchParams(location.search);
+    // const title = searchParams.get('title');
+    // console.log('title', title);
+
     const category = searchParams.get('category');
+    // console.log('category', category);
+
     if (category) {
         findPosts(null, category);
         displayPosts();
@@ -34,10 +43,7 @@ window.addEventListener('load', async () => {
     }
     findPosts();
     displayPosts();
-    const user = getUser();
-    const profile = await getProfile(user.id);
-    profileName.textContent = '  ' + profile.data.username;
-    userAvatar.src = profile.data.url;
+
     // const response = await getPosts();
     // error = response.error;
     // posts = response.data;

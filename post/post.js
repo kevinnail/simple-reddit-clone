@@ -10,6 +10,7 @@ import {
     getComment,
     getComments,
     getPosts,
+    deletePost,
 } from '../fetch-utils.js';
 import { renderComment } from '../render-utils.js';
 
@@ -23,6 +24,8 @@ const commentList = document.getElementById('comment-list');
 const addCommentForm = document.getElementById('add-comment-form');
 const errorDisplay = document.getElementById('error-display');
 const profileName = document.getElementById('profile-name');
+const userAvatar = document.getElementById('user-avatar');
+const deleteButton = document.getElementById('delete-button');
 
 /*  State  */
 let profile = null;
@@ -48,9 +51,13 @@ window.addEventListener('load', async () => {
     if (error) {
         location.replace('/');
     } else {
+        if (user.id === post.user_id) {
+            deleteButton.classList.remove('hide');
+        }
+        profileName.textContent = profile.username;
+        userAvatar.src = profile.url;
         displayPost();
         displayComments();
-        profileName.textContent = profile.username;
     }
 
     onMessage(post.id, async () => {
@@ -134,6 +141,15 @@ postImage.addEventListener('click', () => {
 postCategory.addEventListener('click', () => {
     location.replace(`/?category=${post.category}`);
     getPosts(null, post.category);
+});
+
+deleteButton.addEventListener('click', async () => {
+    const response = await deletePost(post.id);
+    console.log('post id', post.id);
+
+    console.log('response.error from delete button', response.error);
+
+    location.replace('/');
 });
 
 /* Display */
