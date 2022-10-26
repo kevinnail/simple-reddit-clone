@@ -66,8 +66,29 @@ addCommentForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addCommentForm);
 
-    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    let months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+    ];
+    let days = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+    ];
     let d = new Date();
     let day = days[d.getDay()];
     let hr = d.getHours();
@@ -111,7 +132,7 @@ postImage.addEventListener('click', () => {
 });
 
 postCategory.addEventListener('click', () => {
-    location.replace('/');
+    location.replace(`/?category=${post.category}`);
     getPosts(null, post.category);
 });
 
@@ -122,7 +143,8 @@ function displayPost() {
     // postCategory.innerHTML = `<a href${post.category}`;
 
     postDescription.textContent = post.description;
-    postContact.innerHTML = '<p style="font-weight:bold;" >Contact info:</p> ' + post.contact;
+    postContact.innerHTML =
+        '<p style="font-weight:bold;" >Contact info:</p> ' + post.contact;
     postImage.src = post.image_url;
     postImage.alt = `${post.name} image`;
 }

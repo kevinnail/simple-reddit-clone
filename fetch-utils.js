@@ -119,7 +119,11 @@ export async function updateProfile(profile) {
     const user = getUser();
     const response = await client
         .from('profiles')
-        .update({ email: profile.email, username: profile.username, url: profile.image_url })
+        .update({
+            email: profile.email,
+            username: profile.username,
+            url: profile.image_url,
+        })
         .match({ user_id: user.id });
     return response;
 }
@@ -131,7 +135,11 @@ export async function getProfile(id) {
 }
 
 export async function getComments() {
-    let query = client.from('comments').select('*').limit(200).order('created_at', { ascending: false });
+    let query = client
+        .from('comments')
+        .select('*')
+        .limit(200)
+        .order('created_at', { ascending: false });
     const response = await query;
     return response;
 }
@@ -146,10 +154,13 @@ export async function onMessage(postId, handleComment) {
         .on('INSERT', handleComment)
         .on('DELETE', handleComment)
         .subscribe();
-    // client.from(`comments:post_id=eq.${postId}`).on('DELETE', handleComment).subscribe();
 }
 export async function onPost(handlePost) {
-    return await client.from(`posts`).on('INSERT', handlePost).on('DELETE', handlePost).subscribe();
+    return await client
+        .from(`posts`)
+        .on('INSERT', handlePost)
+        .on('DELETE', handlePost)
+        .subscribe();
 }
 
 // export async function updateJoy(id, joyed) {

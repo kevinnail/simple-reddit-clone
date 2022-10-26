@@ -11,17 +11,27 @@ const errorDisplay = document.getElementById('error-display');
 const searchForm = document.getElementById('search-form');
 const profileName = document.getElementById('profile-name');
 const userAvatar = document.getElementById('user-avatar');
+const categorySelect = document.getElementById('category-select');
+
 /* State */
 let error = null;
 let posts = [];
 /* Events */
-window.addEventListener('load', async (payload) => {
+window.addEventListener('load', async () => {
     // > Part C:
     //    - get the pets
     //    - store the error and pets state from the response
     //    - either display the error or the pets
     // const user = getUser();
 
+    const searchParams = new URLSearchParams(location.search);
+    const category = searchParams.get('category');
+    if (category) {
+        findPosts(null, category);
+        displayPosts();
+        categorySelect.value = category;
+        return;
+    }
     findPosts();
     displayPosts();
     const user = getUser();
@@ -95,8 +105,6 @@ function displayPosts() {
     postList.innerHTML = '';
 
     for (const post of posts) {
-        console.log('posts from displayPosts', posts);
-
         const petEl = renderPost(post);
         postList.append(petEl);
     }
