@@ -144,10 +144,13 @@ postCategory.addEventListener('click', () => {
 });
 
 deleteButton.addEventListener('click', async () => {
-    const response = await deletePost(post.id);
-    console.log('post id', post.id);
-
-    console.log('response.error from delete button', response.error);
+    for (const comment of post.comments) {
+        console.log('comment', comment);
+        const response = await deleteComment(comment.id);
+        console.log('response.error', response.error);
+    }
+    const response2 = await deletePost(post.id);
+    console.log('response2.error', response2.error);
 
     location.replace('/');
 });
