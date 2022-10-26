@@ -123,6 +123,8 @@ export async function updateProfile(profile) {
     // > Part A: upsert into profiles table
     // const response = await client.from('profiles').upsert(profile).single();
 
+    console.log('profile.url', profile.image_url);
+
     const user = getUser();
     const response = await client
         .from('profiles')

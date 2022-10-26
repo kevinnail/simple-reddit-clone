@@ -39,12 +39,15 @@ window.addEventListener('load', async () => {
     const response = await getProfile(user.id);
     error = response.error;
     profile = response.data;
+    // console.log('profile', profile);
+
     userAvatar.src = profile.url;
     if (error) {
         displayError();
     }
     if (profile) {
         profileName.textContent = profile.username;
+        preview.src = profile.url;
         displayProfile();
     }
 });
@@ -73,9 +76,14 @@ profileForm.addEventListener('submit', async (e) => {
 
     const imageFile = formData.get('image');
     let url = null;
-    const randomFolder = Math.floor(Date.now() * Math.random());
-    const imagePath = `profile-pics/${randomFolder}/${imageFile.name}`;
-    url = await uploadImage2('project-images', imagePath, imageFile);
+    // console.log('imageFile.size', imageFile.size);
+    if (imageFile.size !== 0) {
+        const randomFolder = Math.floor(Date.now() * Math.random());
+        const imagePath = `profile-pics/${randomFolder}/${imageFile.name}`;
+        url = await uploadImage2('project-images', imagePath, imageFile);
+    } else {
+        url = profile.image_url;
+    }
 
     const profileUpdate = {
         username: formData.get('username'),
