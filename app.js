@@ -2,7 +2,7 @@
 // this will check if we have a user and set signout link if it exists
 import './auth/user.js';
 import { getProfile, getUser } from './fetch-utils.js';
-import { getPost, getPosts } from './fetch-utils.js';
+import { onPost, getPosts } from './fetch-utils.js';
 import { renderPost } from './render-utils.js';
 
 /* Get DOM Elements */
@@ -15,7 +15,7 @@ const userAvatar = document.getElementById('user-avatar');
 let error = null;
 let posts = [];
 /* Events */
-window.addEventListener('load', async () => {
+window.addEventListener('load', async (payload) => {
     // > Part C:
     //    - get the pets
     //    - store the error and pets state from the response
@@ -43,6 +43,12 @@ window.addEventListener('load', async () => {
     //     // findPosts();
     //     displayPosts();
     // }
+
+    onPost(async () => {
+        const superData = await getPosts();
+        posts = superData.data;
+        displayPosts();
+    });
 });
 async function findPosts(title, category) {
     // > Part A: Call the service function that gets the countries
@@ -89,6 +95,8 @@ function displayPosts() {
     postList.innerHTML = '';
 
     for (const post of posts) {
+        console.log('posts from displayPosts', posts);
+
         const petEl = renderPost(post);
         postList.append(petEl);
     }

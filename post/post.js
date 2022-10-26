@@ -9,6 +9,7 @@ import {
     onMessage,
     getComment,
     getComments,
+    getPosts,
 } from '../fetch-utils.js';
 import { renderComment } from '../render-utils.js';
 
@@ -52,24 +53,11 @@ window.addEventListener('load', async () => {
         profileName.textContent = profile.username;
     }
 
-    onMessage(post.id, async (payload) => {
+    onMessage(post.id, async () => {
         {
-            if (payload.eventType === 'INSERT') {
-                const commentId = payload.new.id;
-                const commentResponse = await getComment(commentId);
-                error = commentResponse.error;
-                if (error) {
-                    displayError();
-                } else {
-                    const comment = commentResponse.data;
-                    post.comments.unshift(comment);
-                    displayComments();
-                }
-            } else {
-                const superData = await getPost(post.id);
-                post.comments = superData.data.comments;
-                displayComments();
-            }
+            const superData = await getPost(post.id);
+            post.comments = superData.data.comments;
+            displayComments();
         }
     });
 });
@@ -77,17 +65,6 @@ window.addEventListener('load', async () => {
 addCommentForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addCommentForm);
-    // let currentDate = new Date();
-    // let cDay = currentDate.getDate();
-    // let cMonth = currentDate.getMonth() + 1;
-    // let cYear = currentDate.getFullYear();
-    // let commentDate = cMonth + '/' + cDay + '/' + cYear;
-
-    /////////////////////////////////////////// time below  ////////////////////////////////////////
-    // let currentTime = new Date();
-    // let time = currentTime.getHours() + ':' + currentTime.getMinutes() + ':' + currentTime.getSeconds();
-
-    ////////////////////////////////// date/ time getting/ formatting day w/ am/ pm mth/ yr
 
     let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -96,10 +73,15 @@ addCommentForm.addEventListener('submit', async (e) => {
     let hr = d.getHours();
     let min = d.getMinutes();
 
+    if (hr === 0) {
+        hr = 12;
+    }
+
     if (min < 10) {
         min = '0' + min;
     }
     let ampm = 'am';
+
     if (hr > 12) {
         hr -= 12;
         ampm = 'pm';
@@ -107,25 +89,18 @@ addCommentForm.addEventListener('submit', async (e) => {
     let date = d.getDate();
     let month = months[d.getMonth()];
     let year = d.getFullYear();
-    // let x = document.getElementById('time');
     let time = day + ' ' + hr + ':' + min + ampm + ' ' + month + ' ' + date + ' ' + year;
-    //////////////////////////////////
     const insertComment = {
-        // maybe add a username column to the table then append that data to the comment "posted by..>"
         text: formData.get('text'),
         post_id: post.id,
         username: profile.username,
-        // date: commentDate,
         time: time,
     };
-    //////////////////////////////////////////////////////////////////////////////////////////////////////
     const response = await createComment(insertComment);
     error = response.error;
     if (error) {
         displayError();
     } else {
-        // const comment = response.data;
-        // post.comments.unshift(comment);
         displayComments();
         addCommentForm.reset();
     }
@@ -135,10 +110,17 @@ postImage.addEventListener('click', () => {
     postImage.requestFullscreen();
 });
 
+postCategory.addEventListener('click', () => {
+    location.replace('/');
+    getPosts(null, post.category);
+});
+
 /* Display */
 function displayPost() {
     postTitle.textContent = post.title;
     postCategory.textContent = post.category;
+    // postCategory.innerHTML = `<a href${post.category}`;
+
     postDescription.textContent = post.description;
     postContact.innerHTML = '<p style="font-weight:bold;" >Contact info:</p> ' + post.contact;
     postImage.src = post.image_url;

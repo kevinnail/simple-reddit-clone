@@ -1,4 +1,4 @@
-import { getProfile } from './fetch-utils.js';
+// import { getProfile } from './fetch-utils.js';
 
 export function renderPost(post) {
     const li = document.createElement('li');

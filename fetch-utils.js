@@ -148,6 +148,9 @@ export async function onMessage(postId, handleComment) {
         .subscribe();
     // client.from(`comments:post_id=eq.${postId}`).on('DELETE', handleComment).subscribe();
 }
+export async function onPost(handlePost) {
+    return await client.from(`posts`).on('INSERT', handlePost).on('DELETE', handlePost).subscribe();
+}
 
 // export async function updateJoy(id, joyed) {
 //     const response = await client.from('profiles').select('*').eq('user_id', id).single();
