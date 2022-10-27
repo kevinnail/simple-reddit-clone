@@ -1,6 +1,8 @@
 // import { getProfile } from './fetch-utils.js';
 
-export function renderPost(post) {
+import { getProfile } from './fetch-utils.js';
+
+export function renderPost(post, profile) {
     const li = document.createElement('li');
 
     const a = document.createElement('a');
@@ -26,7 +28,12 @@ export function renderPost(post) {
     p2.textContent = 'Contact: ' + post.contact;
     p2.classList.add('contact-info');
 
-    a.append(h3, h32, img, p, p2);
+    const p3 = document.createElement('p');
+    p3.textContent = `posted by ${profile.data.username} ${post.time}`;
+    p3.classList.add('posted-by');
+    // add "time" column to posts table, access/ display here
+
+    a.append(h3, h32, img, p, p2, p3);
     li.append(a);
     return li;
 }

@@ -1,6 +1,7 @@
 /* Imports */
 import '../auth/user.js';
 import { uploadImage, createPost, getProfile, getUser } from '../fetch-utils.js';
+import { getDateStamp } from '../calc-utils.js';
 /* DOM */
 const postForm = document.getElementById('post-form');
 const errorDisplay = document.getElementById('error-display');
@@ -38,12 +39,14 @@ postForm.addEventListener('submit', async (e) => {
     const randomFolder = Math.floor(Date.now() * Math.random());
     const imagePath = `reddit-clone/${randomFolder}/${imageFile.name}`;
     url = await uploadImage('project-images', imagePath, imageFile);
+    const time = getDateStamp();
     const post = {
         category: formData.get('category'),
         title: formData.get('title'),
         description: formData.get('description'),
         contact: formData.get('contact'),
         image_url: url,
+        time: time,
     };
     const response = await createPost(post);
     error = response.error;

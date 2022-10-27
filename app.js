@@ -16,6 +16,7 @@ const categorySelect = document.getElementById('category-select');
 /* State */
 let error = null;
 let posts = [];
+let profile = null;
 /* Events */
 window.addEventListener('load', async () => {
     // > Part C:
@@ -24,7 +25,7 @@ window.addEventListener('load', async () => {
     //    - either display the error or the pets
     // const user = getUser();
     const user = getUser();
-    const profile = await getProfile(user.id);
+    profile = await getProfile(user.id);
     profileName.textContent = '  ' + profile.data.username;
     userAvatar.src = profile.data.url;
 
@@ -66,55 +67,38 @@ window.addEventListener('load', async () => {
         displayPosts();
     });
 });
-async function findPosts(title, category) {
-    // > Part A: Call the service function that gets the countries
-    const response = await getPosts(title, category);
-    // > Part C: Add the name and continent arguments to getCountries
 
-    // > Part A: Assign to state the :
-    //      - error,
-    //      - data (to the countries variable)
+async function findPosts(title, category) {
+    const response = await getPosts(title, category);
+
     error = response.error;
     posts = response.data;
 
-    // > Part D: Assign to state the:
-    //      - count (of db records)
-    // count = response.count;
-    // displayNotifications();
     if (!error) {
         displayPosts();
     }
 }
+
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(searchForm);
     const title = formData.get('title');
     const category = formData.get('category');
-    // console.log('title ' + title + '  category  ' + category);
-    // if (category !== 'null') {
-    //     findPosts(title, category);
-    //     return;
-    // }
-    // if (title !== '') {
-    //     findPosts(title, category);
-    //     return;
-    // } else {
-    //     findPosts();
-    //     console.log(posts.length);
-    // }
-    // console.log('title ' + title + ' category ' + category);
+
     findPosts(title, category);
 });
 
 /* Display Functions */
+
 function displayPosts() {
     postList.innerHTML = '';
 
     for (const post of posts) {
-        const petEl = renderPost(post);
+        const petEl = renderPost(post, profile);
         postList.append(petEl);
     }
 }
+
 function displayError() {
     if (error) {
         errorDisplay.textContent = error.message;
