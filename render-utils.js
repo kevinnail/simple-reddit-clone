@@ -29,7 +29,7 @@ export function renderPost(post, profile) {
     p2.classList.add('contact-info');
 
     const p3 = document.createElement('p');
-    p3.textContent = `posted by ${profile.data.username} ${post.time}`;
+    p3.textContent = `posted by ${profile} ${post.time}`;
     p3.classList.add('posted-by');
     // add "time" column to posts table, access/ display here
 

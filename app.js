@@ -17,6 +17,7 @@ const categorySelect = document.getElementById('category-select');
 let error = null;
 let posts = [];
 let profile = null;
+let authorProfile = null;
 /* Events */
 window.addEventListener('load', async () => {
     // > Part C:
@@ -26,10 +27,12 @@ window.addEventListener('load', async () => {
     // const user = getUser();
     const user = getUser();
     profile = await getProfile(user.id);
+
     profileName.textContent = '  ' + profile.data.username;
     userAvatar.src = profile.data.url;
 
     const searchParams = new URLSearchParams(location.search);
+
     // const title = searchParams.get('title');
     // console.log('title', title);
 
@@ -92,9 +95,9 @@ searchForm.addEventListener('submit', (e) => {
 
 function displayPosts() {
     postList.innerHTML = '';
-
+    // authorProfile = getProfile(user.id)    //trying to get the profile of the author to put in the renderPost function
     for (const post of posts) {
-        const petEl = renderPost(post, profile);
+        const petEl = renderPost(post, authorProfile);
         postList.append(petEl);
     }
 }

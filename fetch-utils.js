@@ -164,6 +164,7 @@ export async function onMessage(postId, handleComment) {
         .on('DELETE', handleComment)
         .subscribe();
 }
+
 export async function onPost(handlePost) {
     return await client
         .from(`posts`)
