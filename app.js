@@ -18,6 +18,7 @@ let error = null;
 let posts = [];
 let profile = null;
 let authorProfile = null;
+let user = null;
 /* Events */
 window.addEventListener('load', async () => {
     // > Part C:
@@ -25,7 +26,8 @@ window.addEventListener('load', async () => {
     //    - store the error and pets state from the response
     //    - either display the error or the pets
     // const user = getUser();
-    const user = getUser();
+    // const user = getUser();
+    user = getUser();
     profile = await getProfile(user.id);
 
     profileName.textContent = '  ' + profile.data.username;
@@ -93,11 +95,12 @@ searchForm.addEventListener('submit', (e) => {
 
 /* Display Functions */
 
-function displayPosts() {
+async function displayPosts() {
     postList.innerHTML = '';
-    // authorProfile = getProfile(user.id)    //trying to get the profile of the author to put in the renderPost function
+    authorProfile = await getProfile(user.id); //trying to get the profile of the author to put in the renderPost function
+
     for (const post of posts) {
-        const petEl = renderPost(post, authorProfile);
+        const petEl = renderPost(post, authorProfile.data.username);
         postList.append(petEl);
     }
 }
