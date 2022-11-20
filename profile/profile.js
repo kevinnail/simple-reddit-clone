@@ -46,11 +46,11 @@ window.addEventListener('load', async () => {
     // console.log('response', response.error);
     error = response.error;
     profile = response.data;
-    console.log('profile from page load', profile);
+    // console.log('profile from page load', profile);
 
     if (error) {
         displayError();
-        console.log('error happening oh no');
+        // console.log('error happening oh no');
     }
     if (profile) {
         userAvatar.src = profile.url;
@@ -92,7 +92,7 @@ profileForm.addEventListener('submit', async (e) => {
     } else {
         url = profile.url;
     }
-    console.log('url', url);
+    // console.log('url', url);
 
     const profileUpdate = {
         username: formData.get('username'),

@@ -105,7 +105,11 @@ export async function deletePost(id) {
     // return await client.from('comments').delete().eq('id', id).single();
     // console.log('deletePost firing this id:', id);
 
-    return await client.from('posts').delete().eq('id', id).single();
+    const response = await client.from('posts').delete().eq('id', id).single();
+    // console.log('response', response.error);
+
+    return response;
+    // return await client.from('posts').delete().eq('id', id).single();
 }
 
 export async function deleteComment(id) {
@@ -142,7 +146,7 @@ export async function updateProfile(profile) {
     //     .from('profiles')
     //     .upsert(profile)
     //     .match('user_id', user.id);
-    console.log('profile from update Profile BEFORE query', profile);
+    // console.log('profile from update Profile BEFORE query', profile);
 
     const response = await client
         .from('profiles')
@@ -153,9 +157,9 @@ export async function updateProfile(profile) {
             url: profile.url,
         })
         .eq('user_id', user.id);
-    console.log('');
+    // console.log('');
 
-    console.log('response from updateProfile AFTER query', response);
+    // console.log('response from updateProfile AFTER query', response);
 
     return response;
 }
@@ -163,7 +167,7 @@ export async function updateProfile(profile) {
 export async function getProfile(id) {
     // > Part B: get profile by id, maybe single row returned
     const response = await client.from('profiles').select('*').eq('user_id', id).single();
-    console.log('response from getProfile', response);
+    // console.log('response from getProfile', response);
 
     return response;
 }
