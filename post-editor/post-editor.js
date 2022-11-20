@@ -1,7 +1,13 @@
 /* Imports */
 
 import '../auth/user.js';
-import { uploadImage, createPost, getProfile, getUser } from '../fetch-utils.js';
+import {
+    uploadImage,
+    uploadImage2,
+    createPost,
+    getProfile,
+    getUser,
+} from '../fetch-utils.js';
 import { getDateStamp } from '../calc-utils.js';
 
 /* DOM */
@@ -66,13 +72,16 @@ postForm.addEventListener('submit', async (e) => {
     // fucking with vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     //
     let url = null;
+    let urls = [];
     let imagePath = [];
     for (let i = 0; i < imageFile.length; i++) {
         // comment
         const randomFolder = Math.floor(Date.now() * Math.random());
         // const imagePath = `reddit-clone/${randomFolder}/${imageFile[0].name}`;
         imagePath.push('reddit-clone/' + randomFolder + '/' + imageFile[i].name);
-        url = await uploadImage('project-images', imagePath, imageFile);
+        url = await uploadImage('project-images', imagePath[i], imageFile[i]);
+        urls.push(url);
+        // console.log('url: ', url);
     }
 
     const time = getDateStamp();
@@ -82,7 +91,7 @@ postForm.addEventListener('submit', async (e) => {
         title: formData.get('title'),
         description: formData.get('description'),
         contact: formData.get('contact'),
-        image_url: url,
+        image_url: 'tmp data',
         time: time,
         author: profile.data.id,
     };
@@ -101,6 +110,10 @@ postForm.addEventListener('submit', async (e) => {
     //     author: profile.data.id,
     // };
     const response = await createPost(post);
+    // console.log('response.data from createPost', response.data);
+    console.log('urls: ', urls);
+    await uploadImage2(urls, response.data.id);
+    // need another function to input data into the post-id-image table => post_id/ post(id)
     error = response.error;
     addButton.disabled = false;
     if (error) {

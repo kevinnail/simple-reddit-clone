@@ -34,28 +34,6 @@ export async function createPost(post) {
 /* Storage functions  */
 
 export async function uploadImage(bucketName, imagePath, imageFile) {
-    console.log('imageFile from uploadImage', imageFile);
-
-    const bucket = client.storage.from(bucketName);
-    let url = null;
-    const response = await bucket.upload(imagePath[0], imageFile[0], {
-        cacheControl: '3600',
-        // in this case, we will _replace_ any
-        // existing file with same name.
-        upsert: true,
-    });
-
-    if (response.error) {
-        return null;
-    }
-
-    // Construct the URL to this image:
-    url = `${SUPABASE_URL}/storage/v1/object/public/${response.data.Key}`;
-
-    return url;
-}
-
-export async function uploadImage2(bucketName, imagePath, imageFile) {
     const bucket = client.storage.from(bucketName);
     let url = null;
     const response = await bucket.upload(imagePath, imageFile, {
@@ -73,6 +51,22 @@ export async function uploadImage2(bucketName, imagePath, imageFile) {
     url = `${SUPABASE_URL}/storage/v1/object/public/${response.data.Key}`;
 
     return url;
+}
+
+export async function uploadImage2(urls, postId) {
+    // console.log('postId', postId);
+    for (let i = 0; i < urls.length; i++) {
+        // console.log('urls[i] : ', urls[i]);
+
+        let obj = {
+            post_id: postId,
+            image_url: urls[i],
+        };
+
+        // const tryThis = await client.from('post-id-img').insert(obj);
+        await client.from('post-id-img').insert(obj);
+        // console.log('tryThis.error', tryThis.error);
+    }
 }
 
 export async function getPosts(title, category) {
@@ -125,7 +119,7 @@ export async function updateProfile(profile) {
     // > Part A: upsert into profiles table
     // const response = await client.from('profiles').upsert(profile).single();
 
-    console.log('profile.url', profile.image_url);
+    // console.log('profile.url', profile.image_url);
 
     const user = getUser();
     const response = await client
@@ -142,6 +136,10 @@ export async function updateProfile(profile) {
 export async function getProfile(id) {
     // > Part B: get profile by id, maybe single row returned
     const response = await client.from('profiles').select('*').eq('user_id', id).single();
+    return response;
+}
+export async function getUrls(id) {
+    const response = await client.from('post-id-img').select('*').eq('post_id', id);
     return response;
 }
 

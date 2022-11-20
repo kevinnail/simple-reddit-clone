@@ -202,3 +202,7 @@ main {
 .hide {
     display: none;
 }
+
+.post-gallery-pics {
+    width: 450px;
+}

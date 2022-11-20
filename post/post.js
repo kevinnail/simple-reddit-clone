@@ -11,6 +11,7 @@ import {
     getComments,
     getPosts,
     deletePost,
+    getUrls,
 } from '../fetch-utils.js';
 import { getDateStamp } from '../calc-utils.js';
 import { renderComment } from '../render-utils.js';
@@ -27,6 +28,7 @@ const errorDisplay = document.getElementById('error-display');
 const profileName = document.getElementById('profile-name');
 const userAvatar = document.getElementById('user-avatar');
 const deleteButton = document.getElementById('delete-button');
+const gallery = document.getElementById('gallery');
 
 /*  State  */
 let profile = null;
@@ -34,10 +36,12 @@ let error = null;
 let post = null;
 const user = getUser();
 let comments = null;
+let urls = null;
 
 /* Events */
 window.addEventListener('load', async () => {
     const response2 = await getProfile(user.id);
+
     error = response2.error;
     profile = response2.data;
     const searchParams = new URLSearchParams(location.search);
@@ -57,6 +61,8 @@ window.addEventListener('load', async () => {
         }
         profileName.textContent = profile.username;
         userAvatar.src = profile.url;
+        urls = await getUrls(post.id);
+
         displayPost();
         displayComments();
     }
@@ -112,14 +118,27 @@ deleteButton.addEventListener('click', async () => {
 
 /* Display */
 function displayPost() {
+    // console.log('checking urls.length etc', urls.data[0]);
+
     postTitle.textContent = post.title;
     postCategory.textContent = post.category;
 
     postDescription.textContent = post.description;
     postContact.innerHTML =
         '<p style="font-weight:bold;" >Contact info:</p> ' + post.contact;
-    postImage.src = post.image_url;
-    postImage.alt = `${post.name} image`;
+    // console.log('urls.data.length', urls.data.length);
+
+    for (let i = 0; i < urls.data.length; i++) {
+        // postImage.src = post.image_url;
+        // console.log('urls[i]', urls.data[i].image_url);
+
+        // postImage.src = urls.data[i].image_url;
+        // postImage.alt = `${post.name} image`;
+        const imgs = document.createElement('img');
+        imgs.classList.add('post-gallery-pics');
+        imgs.src = urls.data[i].image_url;
+        gallery.append(imgs);
+    }
 }
 async function displayComments() {
     commentList.innerHTML = '';
