@@ -1,6 +1,12 @@
 /*   imports   */
 import '../auth/user.js';
-import { updateProfile, getProfile, getUser, uploadImage } from '../fetch-utils.js';
+import {
+    updateProfile,
+    getProfile,
+    getUser,
+    uploadImage,
+    insertProfile,
+} from '../fetch-utils.js';
 // import { updateProfile } from '../fetch-utils.js';
 
 // const user = getUser();
@@ -37,15 +43,17 @@ window.addEventListener('load', async () => {
     // profileName.textContent = '  ' + profile.data.username;
 
     const response = await getProfile(user.id);
+    // console.log('response', response.error);
     error = response.error;
     profile = response.data;
-    // console.log('profile', profile);
+    console.log('profile from page load', profile);
 
-    userAvatar.src = profile.url;
     if (error) {
         displayError();
+        console.log('error happening oh no');
     }
     if (profile) {
+        userAvatar.src = profile.url;
         profileName.textContent = profile.username;
         preview.src = profile.url;
         displayProfile();
@@ -82,17 +90,26 @@ profileForm.addEventListener('submit', async (e) => {
         const imagePath = `profile-pics/${randomFolder}/${imageFile.name}`;
         url = await uploadImage('project-images', imagePath, imageFile);
     } else {
-        url = profile.image_url;
+        url = profile.url;
     }
+    console.log('url', url);
 
     const profileUpdate = {
         username: formData.get('username'),
         email: formData.get('email'),
-        image_url: url,
+        url: url,
     };
     //      - call updateProfile passing in profile update object, capture the response
     // const response = null; // ??????
-    const response = await updateProfile(profileUpdate);
+    // console.log('profile', profile);
+    let response = null;
+    if (profile) {
+        response = await updateProfile(profileUpdate);
+    } else {
+        response = await insertProfile(profileUpdate);
+    }
+    // console.log('response from updateProfile', response);
+
     error = response.error;
 
     // did it work?

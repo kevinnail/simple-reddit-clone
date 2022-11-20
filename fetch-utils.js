@@ -114,28 +114,57 @@ export async function deleteComment(id) {
 }
 
 // profile functions
+export async function insertProfile(profile) {
+    const user = getUser();
+    const response = await client
+        .from('profiles')
+        .insert({
+            email: profile.email,
+            username: profile.username,
+            url: profile.url,
+        })
+        .eq('user_id', user.id);
+    return response;
+}
 
 export async function updateProfile(profile) {
+    const user = getUser();
+
     // > Part A: upsert into profiles table
     // const response = await client.from('profiles').upsert(profile).single();
 
     // console.log('profile.url', profile.image_url);
 
-    const user = getUser();
+    // console.log('user_id:',user_id:);
+    // console.log(' user.id', user.id);
+
+    // const response = await client
+    //     .from('profiles')
+    //     .upsert(profile)
+    //     .match('user_id', user.id);
+    console.log('profile from update Profile BEFORE query', profile);
+
     const response = await client
         .from('profiles')
         .update({
+            user_id: user.id,
             email: profile.email,
             username: profile.username,
-            url: profile.image_url,
+            url: profile.url,
         })
-        .match({ user_id: user.id });
+        .eq('user_id', user.id);
+    console.log('');
+
+    console.log('response from updateProfile AFTER query', response);
+
     return response;
 }
 
 export async function getProfile(id) {
     // > Part B: get profile by id, maybe single row returned
     const response = await client.from('profiles').select('*').eq('user_id', id).single();
+    console.log('response from getProfile', response);
+
     return response;
 }
 export async function getUrls(id) {
