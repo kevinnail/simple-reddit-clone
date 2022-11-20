@@ -83,7 +83,6 @@ postForm.addEventListener('submit', async (e) => {
         urls.push(url);
         // console.log('url: ', url);
     }
-    console.log('urls.data[0]', urls[0]);
 
     const time = getDateStamp();
 

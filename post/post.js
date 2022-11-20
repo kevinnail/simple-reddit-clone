@@ -7,8 +7,6 @@ import {
     deleteComment,
     getProfile,
     onMessage,
-    getComment,
-    getComments,
     getPosts,
     deletePost,
     getUrls,
@@ -35,7 +33,6 @@ let profile = null;
 let error = null;
 let post = null;
 const user = getUser();
-let comments = null;
 let urls = null;
 
 /* Events */

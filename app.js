@@ -1,7 +1,7 @@
 /* Imports */
 // this will check if we have a user and set signout link if it exists
 import './auth/user.js';
-import { getProfile, getUrls, getUser } from './fetch-utils.js';
+import { getProfile, getUser } from './fetch-utils.js';
 import { onPost, getPosts } from './fetch-utils.js';
 import { renderPost } from './render-utils.js';
 
@@ -102,10 +102,10 @@ function displayPosts() {
     }
 }
 
-function displayError() {
-    if (error) {
-        errorDisplay.textContent = error.message;
-    } else {
-        errorDisplay.textContent = '';
-    }
-}
+// function displayError() {
+//     if (error) {
+//         errorDisplay.textContent = error.message;
+//     } else {
+//         errorDisplay.textContent = '';
+//     }
+// }
