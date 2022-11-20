@@ -104,13 +104,8 @@ postCategory.addEventListener('click', () => {
 deleteButton.addEventListener('click', async () => {
     for (const comment of post.comments) {
         await deleteComment(comment.id);
-        // console.log('comment', comment);
-        // const response = await deleteComment(comment.id);
-        // console.log('response.error', response.error);
     }
-    // const response2 = await deletePost(post.id);
     await deletePost(post.id);
-    // console.log('response2.error', response2.error);
 
     location.replace('/');
 });
@@ -119,7 +114,6 @@ deleteButton.addEventListener('click', async () => {
 function displayPost() {
     postTitle.textContent = post.title;
     postCategory.textContent = post.category;
-    // postCategory.innerHTML = `<a href${post.category}`;
 
     postDescription.textContent = post.description;
     postContact.innerHTML =

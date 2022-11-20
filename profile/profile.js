@@ -1,6 +1,6 @@
 /*   imports   */
 import '../auth/user.js';
-import { updateProfile, getProfile, getUser, uploadImage2 } from '../fetch-utils.js';
+import { updateProfile, getProfile, getUser, uploadImage } from '../fetch-utils.js';
 // import { updateProfile } from '../fetch-utils.js';
 
 // const user = getUser();
@@ -80,7 +80,7 @@ profileForm.addEventListener('submit', async (e) => {
     if (imageFile.size !== 0) {
         const randomFolder = Math.floor(Date.now() * Math.random());
         const imagePath = `profile-pics/${randomFolder}/${imageFile.name}`;
-        url = await uploadImage2('project-images', imagePath, imageFile);
+        url = await uploadImage('project-images', imagePath, imageFile);
     } else {
         url = profile.image_url;
     }
