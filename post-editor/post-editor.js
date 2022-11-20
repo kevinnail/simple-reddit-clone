@@ -47,14 +47,34 @@ postForm.addEventListener('submit', async (e) => {
     let imageFile = [];
     imageFile = formData.getAll('image');
 
+    // works vvvvvvvvvvvvvvvvvvvvvvvvv
+
+    // for (let i = 0; i < imageFile.length; i++) {
+    //     // console.log('imageFile', imageFile[i]);
+
+    //     console.log('imageFile[i].name', imageFile[i].name);
+    // }
+
+    // let url = null;
+    // const randomFolder = Math.floor(Date.now() * Math.random());
+    // const imagePath = `reddit-clone/${randomFolder}/${imageFile[0].name}`;
+    // url = await uploadImage('project-images', imagePath, imageFile);
+    // const time = getDateStamp();
+
+    // works ^^^^^^^^^^^^^^^^^^^^^^^^
+    //
+    // fucking with vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+    //
+    let url = null;
+    let imagePath = [];
     for (let i = 0; i < imageFile.length; i++) {
-        // console.log('imageFile', imageFile[i]);
+        // comment
+        const randomFolder = Math.floor(Date.now() * Math.random());
+        // const imagePath = `reddit-clone/${randomFolder}/${imageFile[0].name}`;
+        imagePath.push('reddit-clone/' + randomFolder + '/' + imageFile[i].name);
+        url = await uploadImage('project-images', imagePath, imageFile);
     }
 
-    let url = null;
-    const randomFolder = Math.floor(Date.now() * Math.random());
-    const imagePath = `reddit-clone/${randomFolder}/${imageFile[0].name}`;
-    url = await uploadImage('project-images', imagePath, imageFile[0]);
     const time = getDateStamp();
 
     const post = {
@@ -66,6 +86,20 @@ postForm.addEventListener('submit', async (e) => {
         time: time,
         author: profile.data.id,
     };
+
+    //fucking with ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    //
+    // works vvvvvvvvvvvvvvvvvvvvvvvvv
+    //
+    // const post = {
+    //     category: formData.get('category'),
+    //     title: formData.get('title'),
+    //     description: formData.get('description'),
+    //     contact: formData.get('contact'),
+    //     image_url: url,
+    //     time: time,
+    //     author: profile.data.id,
+    // };
     const response = await createPost(post);
     error = response.error;
     addButton.disabled = false;

@@ -34,9 +34,11 @@ export async function createPost(post) {
 /* Storage functions  */
 
 export async function uploadImage(bucketName, imagePath, imageFile) {
+    console.log('imageFile from uploadImage', imageFile);
+
     const bucket = client.storage.from(bucketName);
     let url = null;
-    const response = await bucket.upload(imagePath, imageFile, {
+    const response = await bucket.upload(imagePath[0], imageFile[0], {
         cacheControl: '3600',
         // in this case, we will _replace_ any
         // existing file with same name.
