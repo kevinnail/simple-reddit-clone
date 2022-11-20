@@ -17,7 +17,6 @@ import { renderComment } from '../render-utils.js';
 /* DOM */
 const postTitle = document.getElementById('title');
 const postDescription = document.getElementById('description');
-const postImage = document.getElementById('image');
 const postCategory = document.getElementById('category');
 const postContact = document.getElementById('contact');
 const commentList = document.getElementById('comment-list');
@@ -81,7 +80,6 @@ addCommentForm.addEventListener('submit', async (e) => {
         text: formData.get('text'),
         post_id: post.id,
         username: profile.username,
-        // time: time,
         time: getDateStamp(),
     };
 
@@ -93,10 +91,6 @@ addCommentForm.addEventListener('submit', async (e) => {
         displayComments();
         addCommentForm.reset();
     }
-});
-
-postImage.addEventListener('click', () => {
-    postImage.requestFullscreen();
 });
 
 postCategory.addEventListener('click', () => {

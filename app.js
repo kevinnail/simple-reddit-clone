@@ -17,7 +17,7 @@ const categorySelect = document.getElementById('category-select');
 let error = null;
 let posts = [];
 let profile = null;
-let authorProfile = null;
+// let authorProfile = null;
 let user = null;
 /* Events */
 window.addEventListener('load', async () => {
@@ -43,12 +43,12 @@ window.addEventListener('load', async () => {
 
     if (category) {
         findPosts(null, category);
-        displayPosts();
+        await displayPosts();
         categorySelect.value = category;
         return;
     }
     findPosts();
-    displayPosts();
+    await displayPosts();
 
     // const response = await getPosts();
     // error = response.error;
@@ -69,7 +69,7 @@ window.addEventListener('load', async () => {
     onPost(async () => {
         const superData = await getPosts();
         posts = superData.data;
-        displayPosts();
+        await displayPosts();
     });
 });
 
@@ -97,10 +97,10 @@ searchForm.addEventListener('submit', (e) => {
 
 async function displayPosts() {
     postList.innerHTML = '';
-    authorProfile = await getProfile(user.id); //trying to get the profile of the author to put in the renderPost function
+    // authorProfile = await getProfile(user.id); //trying to get the profile of the author to put in the renderPost function
 
     for (const post of posts) {
-        const petEl = renderPost(post, authorProfile.data.username);
+        const petEl = renderPost(post, profile.data.username);
         postList.append(petEl);
     }
 }
