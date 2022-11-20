@@ -83,6 +83,7 @@ postForm.addEventListener('submit', async (e) => {
         urls.push(url);
         // console.log('url: ', url);
     }
+    console.log('urls.data[0]', urls[0]);
 
     const time = getDateStamp();
 
@@ -91,7 +92,7 @@ postForm.addEventListener('submit', async (e) => {
         title: formData.get('title'),
         description: formData.get('description'),
         contact: formData.get('contact'),
-        image_url: 'tmp data',
+        image_url: urls[0],
         time: time,
         author: profile.data.id,
     };
@@ -111,7 +112,7 @@ postForm.addEventListener('submit', async (e) => {
     // };
     const response = await createPost(post);
     // console.log('response.data from createPost', response.data);
-    console.log('urls: ', urls);
+    // console.log('urls: ', urls);
     await uploadImage2(urls, response.data.id);
     // need another function to input data into the post-id-image table => post_id/ post(id)
     error = response.error;

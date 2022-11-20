@@ -1,7 +1,7 @@
 /* Imports */
 // this will check if we have a user and set signout link if it exists
 import './auth/user.js';
-import { getProfile, getUser } from './fetch-utils.js';
+import { getProfile, getUrls, getUser } from './fetch-utils.js';
 import { onPost, getPosts } from './fetch-utils.js';
 import { renderPost } from './render-utils.js';
 

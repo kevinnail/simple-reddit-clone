@@ -1,6 +1,12 @@
 // import { getProfile } from './fetch-utils.js';
 
-import { getProfile } from './fetch-utils.js';
+import { getProfile, getUrls } from './fetch-utils.js';
+
+const tmp = async function getUrls() {
+    const urls = await getUrls();
+    // console.log('urls: ', urls);
+    return urls;
+};
 
 export function renderPost(post, profile) {
     const li = document.createElement('li');
