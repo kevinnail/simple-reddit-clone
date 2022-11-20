@@ -7,7 +7,7 @@ import { renderPost } from './render-utils.js';
 
 /* Get DOM Elements */
 const postList = document.getElementById('post-list');
-const errorDisplay = document.getElementById('error-display');
+// const errorDisplay = document.getElementById('error-display');
 const searchForm = document.getElementById('search-form');
 const profileName = document.getElementById('profile-name');
 const userAvatar = document.getElementById('user-avatar');
